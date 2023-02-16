@@ -46,14 +46,14 @@
       <Border Height="2" BorderBrush="Purple" BorderThickness="1" DockPanel.Dock="Top" />
       <Border Height="10" DockPanel.Dock="Top" />
 
-      <TextBlock Grid.Row="0" Text="Search path:" DockPanel.Dock="Top" />
+      <TextBlock Text="Search path:" DockPanel.Dock="Top" />
       <DockPanel DockPanel.Dock="Top" LastChildFill="True">
-        <Button DockPanel.Dock="Right" Grid.Row="1" Grid.Column="1" Command="{Binding OnSelectFolder}">
+        <Button DockPanel.Dock="Right" Command="{Binding OnSelectFolder}">
           <Panel>
             <Image Source="/Assets/folder.png" Height="20" Width="20"></Image>
           </Panel>
         </Button>
-        <TextBox Grid.Row="1" Text="{Binding SelectedFolder, Mode=TwoWay}"></TextBox>
+        <TextBox Text="{Binding SelectedFolder, Mode=TwoWay}"></TextBox>
       </DockPanel>
       <Border Height="10" DockPanel.Dock="Top" />
 
