@@ -4,6 +4,8 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:dd="clr-namespace:AstroGrep.Core.UI;assembly=AstroGrep.Core.UI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:sys="clr-namespace:System;assembly=netstandard"
+  xmlns:collections="clr-namespace:System.Collections;assembly=System.Runtime"
   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
   Icon="/Assets/search.ico"
   x:Class="AstroGrep.Core.UI.MainWindow"
@@ -11,14 +13,35 @@
   <Design.DataContext>
     <dd:MainWindowViewModel />
   </Design.DataContext>
+
+  <Window.Resources>
+    <!--
+      Have to use ArrayList as a workaround
+        x:Array in XAML
+          https://github.com/AvaloniaUI/Avalonia/issues/3661
+    -->
+    <collections:ArrayList x:Key="FileFilters">
+      <sys:String>*.cs</sys:String>
+      <sys:String>*.csproj</sys:String>
+      <sys:String>*.json</sys:String>
+      <sys:String>*.xaml</sys:String>
+      <sys:String>*.sln</sys:String>
+      <sys:String>*.c</sys:String>
+      <sys:String>*.cpp</sys:String>
+      <sys:String>*.h</sys:String>
+      <sys:String>*.hpp</sys:String>
+      <sys:String>*.vcproj</sys:String>
+    </collections:ArrayList>
+  </Window.Resources>
+
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="Auto" />
       <ColumnDefinition Width="3" />
-      <ColumnDefinition Width="*" />
+      <ColumnDefinition />
     </Grid.ColumnDefinitions>
 
-    <DockPanel LastChildFill="True">
+    <DockPanel LastChildFill="True" Margin="10">
       <TextBlock Foreground="Purple" Text="Astrogrep Lite Search" DockPanel.Dock="Top" />
       <Border Height="2" BorderBrush="Purple" BorderThickness="1" DockPanel.Dock="Top" />
       <Border Height="10" DockPanel.Dock="Top" />
@@ -35,11 +58,11 @@
       <Border Height="10" DockPanel.Dock="Top" />
 
       <TextBlock DockPanel.Dock="Top" Text="File types:" />
-      <TextBox DockPanel.Dock="Top" Text="*.cs" />
+      <AutoCompleteBox Items="{StaticResource FileFilters }" DockPanel.Dock="Top" Text="*.cs" />
       <Border Height="10" DockPanel.Dock="Top" />
 
       <TextBlock DockPanel.Dock="Top" Text="Search text:" />
-      <TextBox DockPanel.Dock="Top" Text="some text" />
+      <TextBox DockPanel.Dock="Top" Text="bind to variable" />
       <Border Height="10" DockPanel.Dock="Top" />
 
       <Button DockPanel.Dock="Top" Command="{Binding OnSearch}">Search</Button>
@@ -72,6 +95,7 @@
 
       <DockPanel LastChildFill="True" DockPanel.Dock="Top">
         <NumericUpDown Value="4" Minimum="1" Maximum="100" Width="120" DockPanel.Dock="Left" />
+        <Border Width="10" DockPanel.Dock="Left" />
         <TextBlock Text="Context lines" />
       </DockPanel>
       <Border Height="10" DockPanel.Dock="Top" />
