@@ -10,6 +10,11 @@ public sealed class MainWindowViewModel : ReactiveObject
 {
   private readonly MainWindow _parent;
 
+  public MainWindowViewModel() :
+    this(null)
+  {
+  }
+
   public MainWindowViewModel(MainWindow parent)
   {
     _parent = parent;
