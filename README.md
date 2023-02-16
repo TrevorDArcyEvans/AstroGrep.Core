@@ -36,6 +36,30 @@ grep.Execute();
 var matchResults = grep.MatchResults;
 ```
 
+## Prerequisites
+* .NET Core 6
+
+## Getting started
+
+```bash
+# clone repository
+git clone https://github.com/TrevorDArcyEvans/AstroGrep.Core.git
+
+# build solution
+cd AstroGrep.Core
+dotnet build
+
+# start UI
+cd AstroGrep.Core.UI
+dotnet run
+```
+
 ## Further work
 * Linux desktop UI
 * reinstate cross platform encoding detection
+
+## Acknowledgements
+* icons from [PngEgg](https://www.pngegg.com)
+  * [folder](https://www.pngegg.com/en/png-fmqfv)
+  * [magnifying glass](https://www.pngegg.com/en/png-babni)
+
