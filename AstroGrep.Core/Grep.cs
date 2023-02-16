@@ -344,33 +344,21 @@ public class Grep
   private void Execute(DirectoryInfo sourceDirectory, string sourceDirectoryFilter, string sourceFileFilter)
   {
     // skip directory if matches an exclusion item
-    if (FileFilterSpec != null && FileFilterSpec.FilterItems != null)
+    var dirFilterItems = from f in FileFilterSpec.FilterItems where f.FilterType.Category == FilterType.Categories.Directory select f;
+    foreach (var item in dirFilterItems)
     {
-      var dirFilterItems = from f in FileFilterSpec.FilterItems where f.FilterType.Category == FilterType.Categories.Directory select f;
-      foreach (var item in dirFilterItems)
+      if (item.ShouldExcludeDirectory(sourceDirectory, out var filterValue))
       {
-        var filterValue = string.Empty;
-        if (item.ShouldExcludeDirectory(sourceDirectory, out filterValue))
-        {
-          OnDirectoryFiltered(sourceDirectory, item, filterValue);
-          return;
-        }
+        OnDirectoryFiltered(sourceDirectory, item, filterValue);
+        return;
       }
     }
 
     // Check for File Filter
-    var filePattern = "*";
-    if (sourceFileFilter != null)
-    {
-      filePattern = sourceFileFilter.Trim();
-    }
+    var filePattern = sourceFileFilter?.Trim() ?? "*";
 
     // Check for Folder Filter
-    var dirPattern = "*";
-    if (sourceDirectoryFilter != null)
-    {
-      dirPattern = sourceDirectoryFilter.Trim();
-    }
+    var dirPattern = sourceDirectoryFilter?.Trim() ?? "*";
 
     //Search Every File for search text
     foreach (var sourceFile in sourceDirectory.EnumerateFiles(filePattern))
@@ -417,9 +405,7 @@ public class Grep
     try
     {
       // skip any files that are filtered out
-      FilterItem filterItem = null;
-      var filterValue = string.Empty;
-      if (ShouldFilterOut(sourceFile, FileFilterSpec, out filterItem, out filterValue))
+      if (ShouldFilterOut(sourceFile, FileFilterSpec, out var filterItem, out var filterValue))
       {
         OnFileFiltered(sourceFile, filterItem, filterValue);
       }
@@ -465,17 +451,14 @@ public class Grep
     filterItem = null;
     filterValue = string.Empty;
 
-    if (fileFilterSpec.FilterItems != null && fileFilterSpec.FilterItems.Count > 0)
+    var fileFilterItems = from f in fileFilterSpec.FilterItems where f.FilterType.Category == FilterType.Categories.File select f;
+    foreach (var item in fileFilterItems)
     {
-      var fileFilterItems = from f in fileFilterSpec.FilterItems where f.FilterType.Category == FilterType.Categories.File select f;
-      foreach (var item in fileFilterItems)
+      filterValue = string.Empty;
+      if (item.ShouldExcludeFile(file, out filterValue))
       {
-        filterValue = string.Empty;
-        if (item.ShouldExcludeFile(file, out filterValue))
-        {
-          filterItem = item;
-          return true;
-        }
+        filterItem = item;
+        return true;
       }
     }
 
@@ -561,7 +544,7 @@ public class Grep
           }
           else
           {
-            OnSearchError(file, new Exception(string.Format("Plugin {0} failed to load.", t.Plugin.Name)));
+            OnSearchError(file, new Exception($"Plugin {t.Plugin.Name} failed to load."));
           }
 
           t.Plugin.Unload();
@@ -785,7 +768,7 @@ public class Grep
               }
 
               // If there is a match in the first one or two lines,
-              // the entire preceeding context may not be available.
+              // the entire preceding context may not be available.
               if (lineNumber > tempPosInStr)
               {
                 // Add the context line.
@@ -942,7 +925,7 @@ public class Grep
       var begin = line.Substring(0, pos);
       var end = line.Substring(pos + searchSpec.SearchText.Length);
 
-      // do a check to see if begin and end are valid for wholeword searches
+      // do a check to see if begin and end are valid for whole word searches
       var highlight = true;
       if (searchSpec.UseWholeWordMatching)
       {
@@ -1061,7 +1044,7 @@ public class Grep
   /// </history>
   private bool StrictMatch(string fileExtension, string searchPattern)
   {
-    var isStrictMatch = false;
+    bool isStrictMatch;
 
     var index = searchPattern.LastIndexOf('.');
     var extension = index > -1 ? searchPattern.Substring(index) : searchPattern;
