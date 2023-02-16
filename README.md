@@ -12,8 +12,8 @@ I also renamed the assembly from `libAstroGrep.dll` to `AstroGrep.Core.dll`.
 ```
 
 ## Additional work
-* port to .NET Core 6
-* remove all Windows specific code
+* ported to .NET Core 6
+* removed all Windows specific code
   * removed all encoding detection 
 * ported to Linux
 
