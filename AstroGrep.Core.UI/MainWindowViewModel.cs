@@ -24,7 +24,6 @@ public sealed class MainWindowViewModel : ReactiveObject
   public MainWindowViewModel(MainWindow parent)
   {
     _parent = parent;
-    _parent.MatchResultsSelectionChanged += OnMatchResultsSelectionChanged;
 
     PropertyChanged += OnPropertyChanged;
   }
@@ -148,6 +147,18 @@ public sealed class MainWindowViewModel : ReactiveObject
     set => this.RaiseAndSetIfChanged(ref _isOnSearchEnabled, value);
   }
 
+  private MatchResult _selectedItem;
+  public MatchResult SelectedItem
+  {
+    get => _selectedItem;
+
+    set
+    {
+      this.RaiseAndSetIfChanged(ref _selectedItem, value);
+      OnMatchResultsSelectionChanged(this, SelectedItem);
+    }
+  }
+
   #endregion
 
   public async Task OnSelectStartFolder()
@@ -184,9 +195,8 @@ public sealed class MainWindowViewModel : ReactiveObject
     MatchResults = grep.MatchResults;
   }
 
-  public void OnMatchResultsSelectionChanged(object sender, SelectionChangedEventArgs e)
+  public void OnMatchResultsSelectionChanged(object sender, MatchResult matchRes)
   {
-    var matchRes = e.AddedItems.OfType<MatchResult>().SingleOrDefault();
     MatchResult = Render(matchRes);
   }
 
@@ -204,10 +214,10 @@ public sealed class MainWindowViewModel : ReactiveObject
   private string Render(MatchResult result)
   {
     var sb = new StringBuilder();
-    foreach (var match in result.Matches)
+    foreach (var matchLine in result?.Matches ?? Enumerable.Empty<MatchResultLine>())
     {
-      var lineNum = match.LineNumber == -1 ? string.Empty : match.LineNumber.ToString(CultureInfo.InvariantCulture);
-      sb.AppendLine($"{lineNum}  {match.Line}");
+      var lineNum = matchLine.LineNumber == -1 ? string.Empty : matchLine.LineNumber.ToString(CultureInfo.InvariantCulture);
+      sb.AppendLine($"{lineNum}  {matchLine.Line}");
     }
 
     sb.AppendLine();

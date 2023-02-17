@@ -119,7 +119,7 @@
       Have to use event handler on View as will not compile with binding to ViewModel:
         SelectionChanged="{Binding OnMatchResultsSelectionChanged}"
       -->
-      <DataGrid Items="{Binding MatchResults, Mode=OneWay}" SelectionChanged="OnMatchResultsSelectionChanged">
+      <DataGrid Items="{Binding MatchResults, Mode=OneWay}" SelectedItem="{Binding SelectedItem}">
         <DataGrid.Columns>
           <DataGridTextColumn Header="Name" Binding="{Binding  File.Name}" />
           <DataGridTextColumn Header="Located in" Binding="{Binding File.DirectoryName}" />
