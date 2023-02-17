@@ -117,7 +117,7 @@ public class FilterType
   /// <summary>
   /// Gets whether this object can support having more than 1 instance of this object defined system wide.
   /// </summary>
-  public bool SupportsMulitpleItems { get; } = true;
+  public bool SupportsMultipleItems { get; } = true;
 
   /// <summary>
   /// Creates an instance of this class with the required category and sub category.
@@ -139,7 +139,7 @@ public class FilterType
         ValueType = ValueTypes.String;
         SupportedValueOptions = new List<ValueOptions> { ValueOptions.Equals, ValueOptions.Contains, ValueOptions.StartsWith, ValueOptions.EndsWith };
         SupportsIgnoreCase = true;
-        SupportsMulitpleItems = true;
+        SupportsMultipleItems = true;
         break;
 
       case SubCategories.Hidden:
@@ -149,7 +149,7 @@ public class FilterType
         ValueType = ValueTypes.Null;
         SupportedValueOptions = new List<ValueOptions> { ValueOptions.None };
         SupportsIgnoreCase = false;
-        SupportsMulitpleItems = false;
+        SupportsMultipleItems = false;
         break;
 
       case SubCategories.DateModified:
@@ -157,28 +157,28 @@ public class FilterType
         ValueType = ValueTypes.DateTime;
         SupportedValueOptions = new List<ValueOptions> { ValueOptions.Equals, ValueOptions.NotEquals, ValueOptions.GreaterThan, ValueOptions.GreaterThanEquals, ValueOptions.LessThan, ValueOptions.LessThanEquals };
         SupportsIgnoreCase = false;
-        SupportsMulitpleItems = true;
+        SupportsMultipleItems = true;
         break;
 
       case SubCategories.Extension:
         ValueType = ValueTypes.String;
         SupportedValueOptions = new List<ValueOptions> { ValueOptions.None };
         SupportsIgnoreCase = false;
-        SupportsMulitpleItems = true;
+        SupportsMultipleItems = true;
         break;
 
       case SubCategories.Size:
         ValueType = ValueTypes.Size;
         SupportedValueOptions = new List<ValueOptions> { ValueOptions.Equals, ValueOptions.NotEquals, ValueOptions.GreaterThan, ValueOptions.GreaterThanEquals, ValueOptions.LessThan, ValueOptions.LessThanEquals };
         SupportsIgnoreCase = false;
-        SupportsMulitpleItems = true;
+        SupportsMultipleItems = true;
         break;
 
       case SubCategories.MinimumHitCount:
         ValueType = ValueTypes.Long;
         SupportedValueOptions = new List<ValueOptions> { ValueOptions.None };
         SupportsIgnoreCase = false;
-        SupportsMulitpleItems = false;
+        SupportsMultipleItems = false;
         break;
     }
   }
@@ -221,28 +221,29 @@ public class FilterType
   /// </history>
   public static List<FilterType> GetDefaultFilterTypes()
   {
-    var defaultTypes = new List<FilterType>();
+    var defaultTypes = new List<FilterType>
+    {
+      // File
+      new FilterType(Categories.File, SubCategories.Extension),
+      new FilterType(Categories.File, SubCategories.Name),
+      new FilterType(Categories.File, SubCategories.Path),
+      new FilterType(Categories.File, SubCategories.System),
+      new FilterType(Categories.File, SubCategories.Hidden),
+      new FilterType(Categories.File, SubCategories.Binary),
+      new FilterType(Categories.File, SubCategories.ReadOnly),
+      new FilterType(Categories.File, SubCategories.DateModified),
+      new FilterType(Categories.File, SubCategories.DateCreated),
+      new FilterType(Categories.File, SubCategories.Size),
+      new FilterType(Categories.File, SubCategories.MinimumHitCount),
 
-    // File
-    defaultTypes.Add(new FilterType(Categories.File, SubCategories.Extension));
-    defaultTypes.Add(new FilterType(Categories.File, SubCategories.Name));
-    defaultTypes.Add(new FilterType(Categories.File, SubCategories.Path));
-    defaultTypes.Add(new FilterType(Categories.File, SubCategories.System));
-    defaultTypes.Add(new FilterType(Categories.File, SubCategories.Hidden));
-    defaultTypes.Add(new FilterType(Categories.File, SubCategories.Binary));
-    defaultTypes.Add(new FilterType(Categories.File, SubCategories.ReadOnly));
-    defaultTypes.Add(new FilterType(Categories.File, SubCategories.DateModified));
-    defaultTypes.Add(new FilterType(Categories.File, SubCategories.DateCreated));
-    defaultTypes.Add(new FilterType(Categories.File, SubCategories.Size));
-    defaultTypes.Add(new FilterType(Categories.File, SubCategories.MinimumHitCount));
-
-    // Directory
-    defaultTypes.Add(new FilterType(Categories.Directory, SubCategories.Name));
-    defaultTypes.Add(new FilterType(Categories.Directory, SubCategories.Path));
-    defaultTypes.Add(new FilterType(Categories.Directory, SubCategories.System));
-    defaultTypes.Add(new FilterType(Categories.Directory, SubCategories.Hidden));
-    defaultTypes.Add(new FilterType(Categories.Directory, SubCategories.DateModified));
-    defaultTypes.Add(new FilterType(Categories.Directory, SubCategories.DateCreated));
+      // Directory
+      new FilterType(Categories.Directory, SubCategories.Name),
+      new FilterType(Categories.Directory, SubCategories.Path),
+      new FilterType(Categories.Directory, SubCategories.System),
+      new FilterType(Categories.Directory, SubCategories.Hidden),
+      new FilterType(Categories.Directory, SubCategories.DateModified),
+      new FilterType(Categories.Directory, SubCategories.DateCreated)
+    };
 
     return defaultTypes;
   }

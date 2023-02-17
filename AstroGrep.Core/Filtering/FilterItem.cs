@@ -160,7 +160,7 @@ public class FilterItem
           var temp = Value.ToLower();
           if (file.Extension.StartsWith(".") && !temp.StartsWith("."))
           {
-            temp = string.Format(".{0}", temp);
+            temp = $".{temp}";
           }
 
           value = temp;
