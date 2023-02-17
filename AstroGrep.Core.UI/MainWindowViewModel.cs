@@ -35,6 +35,69 @@ public sealed class MainWindowViewModel : ReactiveObject
     set => this.RaiseAndSetIfChanged(ref _startFolder, value);
   }
 
+  private bool _searchInSubfolders = true;
+
+  public bool SearchInSubfolders
+  {
+    get => _searchInSubfolders;
+
+    set => this.RaiseAndSetIfChanged(ref _searchInSubfolders, value);
+  }
+
+  private bool _useRegularExpressions;
+
+  public bool UseRegularExpressions
+  {
+    get => _useRegularExpressions;
+
+    set => this.RaiseAndSetIfChanged(ref _useRegularExpressions, value);
+  }
+
+  private bool _useCaseSensitivity;
+
+  public bool UseCaseSensitivity
+  {
+    get => _useCaseSensitivity;
+
+    set => this.RaiseAndSetIfChanged(ref _useCaseSensitivity, value);
+  }
+
+  private bool _useWholeWordMatching;
+
+  public bool UseWholeWordMatching
+  {
+    get => _useWholeWordMatching;
+
+    set => this.RaiseAndSetIfChanged(ref _useWholeWordMatching, value);
+  }
+
+  private bool _useNegation;
+
+  public bool UseNegation
+  {
+    get => _useNegation;
+
+    set => this.RaiseAndSetIfChanged(ref _useNegation, value);
+  }
+
+  private int _contextLines = 4;
+
+  public int ContextLines
+  {
+    get => _contextLines;
+
+    set => this.RaiseAndSetIfChanged(ref _contextLines, value);
+  }
+
+  private bool _returnOnlyFileNames;
+
+  public bool ReturnOnlyFileNames
+  {
+    get => _returnOnlyFileNames;
+
+    set => this.RaiseAndSetIfChanged(ref _returnOnlyFileNames, value);
+  }
+
   private string _searchText;
 
   public string SearchText
@@ -81,6 +144,13 @@ public sealed class MainWindowViewModel : ReactiveObject
     {
       StartDirectories = new List<string> { StartFolder },
       SearchText = SearchText,
+      UseRegularExpressions = UseRegularExpressions,
+      UseCaseSensitivity = UseCaseSensitivity,
+      UseWholeWordMatching = UseWholeWordMatching,
+      SearchInSubfolders = SearchInSubfolders,
+      ReturnOnlyFileNames = ReturnOnlyFileNames,
+      UseNegation = UseNegation,
+      ContextLines = ContextLines
     };
 
     var filterSpec = new FileFilterSpec
