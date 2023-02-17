@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Text;
 
 namespace AstroGrep.Core.UI;
@@ -116,6 +117,15 @@ public sealed class MainWindowViewModel : ReactiveObject
     set => this.RaiseAndSetIfChanged(ref _fileType, value);
   }
 
+  private IEnumerable<MatchResult> _matchResults = Enumerable.Empty<MatchResult>();
+
+  public IEnumerable<MatchResult> MatchResults
+  {
+    get => _matchResults;
+
+    set => this.RaiseAndSetIfChanged(ref _matchResults, value);
+  }
+
   private string _dumpMatch;
 
   public string DumpMatch
@@ -160,12 +170,12 @@ public sealed class MainWindowViewModel : ReactiveObject
 
     var grep = new Grep(searchSpec, filterSpec);
     grep.Execute();
-    var matchResults = grep.MatchResults;
+    MatchResults = grep.MatchResults;
 
-    Dump(matchResults);
+    DumpMatch = Dump(MatchResults);
   }
 
-  private void Dump(IEnumerable<MatchResult> results)
+  private string Dump(IEnumerable<MatchResult> results)
   {
     var sb = new StringBuilder();
     sb.AppendLine("--------------------");
@@ -178,6 +188,6 @@ public sealed class MainWindowViewModel : ReactiveObject
       }
     }
 
-    DumpMatch = sb.ToString();
+    return sb.ToString();
   }
 }

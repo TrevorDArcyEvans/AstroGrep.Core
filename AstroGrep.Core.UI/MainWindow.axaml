@@ -6,8 +6,10 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:sys="clr-namespace:System;assembly=netstandard"
   xmlns:collections="clr-namespace:System.Collections;assembly=System.Runtime"
-  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
   Icon="/Assets/search.ico"
+  Width="1200"
+  Height="800"
   x:Class="AstroGrep.Core.UI.MainWindow"
   Title="AstroGrep Lite">
   <Design.DataContext>
@@ -58,7 +60,8 @@
       <Border DockPanel.Dock="Top" Height="10" />
 
       <TextBlock DockPanel.Dock="Top" Text="File types:" />
-      <AutoCompleteBox DockPanel.Dock="Top" Items="{StaticResource FileFilters }" Text="{Binding FileType, Mode=TwoWay}" />
+      <AutoCompleteBox DockPanel.Dock="Top" Items="{StaticResource FileFilters }"
+                       Text="{Binding FileType, Mode=TwoWay}" />
       <Border DockPanel.Dock="Top" Height="10" />
 
       <TextBlock DockPanel.Dock="Top" Text="Search text:" />
@@ -113,9 +116,16 @@
         <RowDefinition />
       </Grid.RowDefinitions>
 
-      <TextBox AcceptsReturn="True" Text="{Binding DumpMatch}"></TextBox>
+      <DataGrid Items="{Binding MatchResults, Mode=OneWay}">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="Name" Binding="{Binding File.Name}"/>
+          <DataGridTextColumn Header="Located in" Binding="{Binding File.DirectoryName}"/>
+          <DataGridTextColumn Header="Count" IsReadOnly="True" Binding="{Binding HitCount}"/>
+        </DataGrid.Columns>
+      </DataGrid>
+
       <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Background="Purple" ResizeDirection="Rows" />
-      <TextBox Grid.Row="2" AcceptsReturn="True" Text="{Binding StartFolder, Mode=TwoWay}"></TextBox>
+      <TextBox Grid.Row="2" AcceptsReturn="True" Text="{Binding DumpMatch, Mode=TwoWay}"></TextBox>
     </Grid>
 
   </Grid>
