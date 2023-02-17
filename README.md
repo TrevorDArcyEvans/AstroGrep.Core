@@ -1,5 +1,7 @@
 # AstroGrep.Core
 
+![screenshot](./screenshot.png)
+
 This is a fork of [AstroGrep.Core](https://github.com/asherber/AstroGrep.Core), which, in turn, is a fork of
 the original [AstroGrep repo](https://github.com/joshball/astrogrep). 
 
@@ -16,6 +18,7 @@ I also renamed the assembly from `libAstroGrep.dll` to `AstroGrep.Core.dll`.
 * removed all Windows specific code
   * removed all encoding detection 
 * ported to Linux
+* added portable UI
 
 ## Sample usage:
 
@@ -55,7 +58,7 @@ dotnet run
 ```
 
 ## Further work
-* Linux desktop UI
+* ~~Linux desktop UI~~
 * reinstate cross platform encoding detection
 
 ## Acknowledgements
