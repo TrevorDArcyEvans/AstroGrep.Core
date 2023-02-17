@@ -1,4 +1,7 @@
-﻿namespace AstroGrep.Core.UI;
+﻿using System.ComponentModel;
+using System.IO;
+
+namespace AstroGrep.Core.UI;
 
 using System;
 using System.Collections.Generic;
@@ -22,6 +25,8 @@ public sealed class MainWindowViewModel : ReactiveObject
   {
     _parent = parent;
     _parent.MatchResultsSelectionChanged += OnMatchResultsSelectionChanged;
+
+    PropertyChanged += OnPropertyChanged;
   }
 
   #region Properties
@@ -134,6 +139,15 @@ public sealed class MainWindowViewModel : ReactiveObject
     set => this.RaiseAndSetIfChanged(ref _matchResult, value);
   }
 
+  private bool _isOnSearchEnabled;
+
+  public bool IsOnSearchEnabled
+  {
+    get => _isOnSearchEnabled;
+
+    set => this.RaiseAndSetIfChanged(ref _isOnSearchEnabled, value);
+  }
+
   #endregion
 
   public async Task OnSelectStartFolder()
@@ -174,6 +188,17 @@ public sealed class MainWindowViewModel : ReactiveObject
   {
     var matchRes = e.AddedItems.OfType<MatchResult>().SingleOrDefault();
     MatchResult = Render(matchRes);
+  }
+
+  private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+  {
+    if (e.PropertyName is nameof(SearchText) or nameof(FileType) or nameof(StartFolder))
+    {
+      IsOnSearchEnabled = 
+        !string.IsNullOrEmpty(SearchText) && 
+        !string.IsNullOrEmpty(FileType) && 
+        Directory.Exists(StartFolder);
+    }
   }
 
   private string Render(MatchResult result)

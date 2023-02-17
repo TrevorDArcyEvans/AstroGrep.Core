@@ -60,15 +60,14 @@
       <Border DockPanel.Dock="Top" Height="10" />
 
       <TextBlock DockPanel.Dock="Top" Text="File types:" />
-      <AutoCompleteBox DockPanel.Dock="Top" Items="{StaticResource FileFilters }"
-                       Text="{Binding FileType}" />
+      <AutoCompleteBox DockPanel.Dock="Top" Items="{StaticResource FileFilters }" Text="{Binding FileType}" />
       <Border DockPanel.Dock="Top" Height="10" />
 
       <TextBlock DockPanel.Dock="Top" Text="Search text:" />
       <TextBox DockPanel.Dock="Top" Watermark="Please enter search text" Text="{Binding SearchText}" />
       <Border DockPanel.Dock="Top" Height="10" />
 
-      <Button DockPanel.Dock="Top" Command="{Binding OnSearch}">Search</Button>
+      <Button DockPanel.Dock="Top" Command="{Binding OnSearch}" IsEnabled="{Binding IsOnSearchEnabled}">Search</Button>
       <Border DockPanel.Dock="Top" Height="10" />
 
       <TextBlock DockPanel.Dock="Top" Foreground="Purple" Text="Search Options" />
