@@ -55,17 +55,17 @@
             <Image Source="/Assets/folder.png" Height="20" Width="20"></Image>
           </Panel>
         </Button>
-        <TextBox Text="{Binding StartFolder, Mode=TwoWay}"></TextBox>
+        <TextBox Text="{Binding StartFolder}"></TextBox>
       </DockPanel>
       <Border DockPanel.Dock="Top" Height="10" />
 
       <TextBlock DockPanel.Dock="Top" Text="File types:" />
       <AutoCompleteBox DockPanel.Dock="Top" Items="{StaticResource FileFilters }"
-                       Text="{Binding FileType, Mode=TwoWay}" />
+                       Text="{Binding FileType}" />
       <Border DockPanel.Dock="Top" Height="10" />
 
       <TextBlock DockPanel.Dock="Top" Text="Search text:" />
-      <TextBox DockPanel.Dock="Top" Watermark="Please enter search text" Text="{Binding SearchText, Mode=TwoWay}" />
+      <TextBox DockPanel.Dock="Top" Watermark="Please enter search text" Text="{Binding SearchText}" />
       <Border DockPanel.Dock="Top" Height="10" />
 
       <Button DockPanel.Dock="Top" Command="{Binding OnSearch}">Search</Button>
@@ -125,7 +125,7 @@
       </DataGrid>
 
       <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Background="Purple" ResizeDirection="Rows" />
-      <TextBox Grid.Row="2" AcceptsReturn="True" Text="{Binding DumpMatch, Mode=TwoWay}"></TextBox>
+      <TextBox Grid.Row="2" AcceptsReturn="True" Text="{Binding DumpMatch, Mode=OneWay}"></TextBox>
     </Grid>
 
   </Grid>
