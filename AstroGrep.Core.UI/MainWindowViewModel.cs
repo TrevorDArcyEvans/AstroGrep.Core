@@ -26,13 +26,13 @@ public sealed class MainWindowViewModel : ReactiveObject
 
   #region Properties
 
-  private string _selectedFolder = Environment.CurrentDirectory;
+  private string _startFolder = Environment.CurrentDirectory;
 
-  public string SelectedFolder
+  public string StartFolder
   {
-    get => _selectedFolder;
+    get => _startFolder;
 
-    set => this.RaiseAndSetIfChanged(ref _selectedFolder, value);
+    set => this.RaiseAndSetIfChanged(ref _startFolder, value);
   }
 
   private string _searchText;
@@ -64,22 +64,22 @@ public sealed class MainWindowViewModel : ReactiveObject
 
   #endregion
 
-  public async Task OnSelectFolder()
+  public async Task OnSelectStartFolder()
   {
     var dlg = new OpenFolderDialog
     {
-      Directory = SelectedFolder
+      Directory = StartFolder
     };
-    SelectedFolder = await dlg.ShowAsync(_parent) ?? SelectedFolder;
+    StartFolder = await dlg.ShowAsync(_parent) ?? StartFolder;
 
-    Debug.WriteLine(SelectedFolder);
+    Debug.WriteLine(StartFolder);
   }
 
   public void OnSearch()
   {
     var searchSpec = new SearchSpec
     {
-      StartDirectories = new List<string> { SelectedFolder },
+      StartDirectories = new List<string> { StartFolder },
       SearchText = SearchText,
     };
 

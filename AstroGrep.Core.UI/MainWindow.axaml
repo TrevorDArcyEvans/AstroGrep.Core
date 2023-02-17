@@ -48,12 +48,12 @@
 
       <TextBlock DockPanel.Dock="Top" Text="Search path:" />
       <DockPanel DockPanel.Dock="Top" LastChildFill="True">
-        <Button DockPanel.Dock="Right" Command="{Binding OnSelectFolder}">
+        <Button DockPanel.Dock="Right" Command="{Binding OnSelectStartFolder}">
           <Panel>
             <Image Source="/Assets/folder.png" Height="20" Width="20"></Image>
           </Panel>
         </Button>
-        <TextBox Text="{Binding SelectedFolder, Mode=TwoWay}"></TextBox>
+        <TextBox Text="{Binding StartFolder, Mode=TwoWay}"></TextBox>
       </DockPanel>
       <Border DockPanel.Dock="Top" Height="10" />
 
@@ -115,7 +115,7 @@
 
       <TextBox AcceptsReturn="True" Text="{Binding DumpMatch}"></TextBox>
       <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Background="Purple" ResizeDirection="Rows" />
-      <TextBox Grid.Row="2" AcceptsReturn="True" Text="{Binding SelectedFolder, Mode=TwoWay}"></TextBox>
+      <TextBox Grid.Row="2" AcceptsReturn="True" Text="{Binding StartFolder, Mode=TwoWay}"></TextBox>
     </Grid>
 
   </Grid>
