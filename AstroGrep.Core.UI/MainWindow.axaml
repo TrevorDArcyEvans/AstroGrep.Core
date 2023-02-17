@@ -116,16 +116,20 @@
         <RowDefinition />
       </Grid.RowDefinitions>
 
-      <DataGrid Items="{Binding MatchResults, Mode=OneWay}">
+      <!--
+      Have to use event handler on View as will not compile with binding to ViewModel:
+        SelectionChanged="{Binding OnMatchResultsSelectionChanged}"
+      -->
+      <DataGrid Items="{Binding MatchResults, Mode=OneWay}" SelectionChanged="OnMatchResultsSelectionChanged">
         <DataGrid.Columns>
-          <DataGridTextColumn Header="Name" Binding="{Binding File.Name}"/>
+          <DataGridTextColumn Header="Name" Binding="{Binding  File.Name}"/>
           <DataGridTextColumn Header="Located in" Binding="{Binding File.DirectoryName}"/>
           <DataGridTextColumn Header="Count" IsReadOnly="True" Binding="{Binding HitCount}"/>
         </DataGrid.Columns>
       </DataGrid>
 
       <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Background="Purple" ResizeDirection="Rows" />
-      <TextBox Grid.Row="2" AcceptsReturn="True" Text="{Binding DumpMatch, Mode=OneWay}"></TextBox>
+      <TextBox Grid.Row="2" FontFamily="Courier New" AcceptsReturn="True" Text="{Binding MatchResult, Mode=OneWay}"></TextBox>
     </Grid>
 
   </Grid>

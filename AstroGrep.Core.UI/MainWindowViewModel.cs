@@ -1,12 +1,10 @@
-﻿using System.Linq;
-using System.Net;
-using System.Text;
-
-namespace AstroGrep.Core.UI;
+﻿namespace AstroGrep.Core.UI;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using ReactiveUI;
@@ -23,6 +21,7 @@ public sealed class MainWindowViewModel : ReactiveObject
   public MainWindowViewModel(MainWindow parent)
   {
     _parent = parent;
+    _parent.MatchResultsSelectionChanged += OnMatchResultsSelectionChanged;
   }
 
   #region Properties
@@ -126,13 +125,13 @@ public sealed class MainWindowViewModel : ReactiveObject
     set => this.RaiseAndSetIfChanged(ref _matchResults, value);
   }
 
-  private string _dumpMatch;
+  private string _matchResult;
 
-  public string DumpMatch
+  public string MatchResult
   {
-    get => _dumpMatch;
+    get => _matchResult;
 
-    set => this.RaiseAndSetIfChanged(ref _dumpMatch, value);
+    set => this.RaiseAndSetIfChanged(ref _matchResult, value);
   }
 
   #endregion
@@ -144,8 +143,6 @@ public sealed class MainWindowViewModel : ReactiveObject
       Directory = StartFolder
     };
     StartFolder = await dlg.ShowAsync(_parent) ?? StartFolder;
-
-    Debug.WriteLine(StartFolder);
   }
 
   public void OnSearch()
@@ -171,22 +168,24 @@ public sealed class MainWindowViewModel : ReactiveObject
     var grep = new Grep(searchSpec, filterSpec);
     grep.Execute();
     MatchResults = grep.MatchResults;
-
-    DumpMatch = Dump(MatchResults);
   }
 
-  private string Dump(IEnumerable<MatchResult> results)
+  public void OnMatchResultsSelectionChanged(object sender, SelectionChangedEventArgs e)
+  {
+    var matchRes = e.AddedItems.OfType<MatchResult>().SingleOrDefault();
+    MatchResult = Render(matchRes);
+  }
+
+  private string Render(MatchResult result)
   {
     var sb = new StringBuilder();
-    sb.AppendLine("--------------------");
-    foreach (var result in results)
+    foreach (var match in result.Matches)
     {
-      sb.AppendLine($"{result.File.Name}");
-      foreach (var match in result.Matches)
-      {
-        sb.AppendLine($"  {match.Line}");
-      }
+      var lineNum = match.LineNumber == -1 ? string.Empty : match.LineNumber.ToString(CultureInfo.InvariantCulture);
+      sb.AppendLine($"{lineNum}  {match.Line}");
     }
+
+    sb.AppendLine();
 
     return sb.ToString();
   }
