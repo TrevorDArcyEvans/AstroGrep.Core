@@ -1,7 +1,4 @@
-﻿using System.Text.Json.Nodes;
-using Newtonsoft.Json.Linq;
-
-namespace AstroGrep.Core.UI;
+﻿namespace AstroGrep.Core.UI;
 
 using System;
 using System.Collections.Generic;
@@ -19,6 +16,7 @@ using Avalonia.Media;
 using AvaloniaEdit;
 using AvaloniaEdit.Document;
 using AvaloniaEdit.TextMate;
+using Newtonsoft.Json.Linq;
 using ReactiveUI;
 using TextMateSharp.Grammars;
 
@@ -30,7 +28,7 @@ public sealed class MainWindowViewModel : ReactiveObject
   private readonly TextEditor _textEditor;
   private RegistryOptions _registryOptions = new(ThemeName.Monokai);
 
-  public List<FilterItem> FilterItems { get; set; }
+  public List<FilterItem> FilterItems { get; private set; }
 
   public MainWindowViewModel() :
     this(null)
