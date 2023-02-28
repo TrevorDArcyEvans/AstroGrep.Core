@@ -6,6 +6,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:sys="clr-namespace:System;assembly=netstandard"
   xmlns:collections="clr-namespace:System.Collections;assembly=System.Runtime"
+  xmlns:AvalonEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
   Icon="/Assets/search.ico"
   Width="1200"
@@ -127,8 +128,19 @@
         </DataGrid.Columns>
       </DataGrid>
 
-      <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Background="Purple" ResizeDirection="Rows" />
-      <TextBox Grid.Row="2" FontFamily="Courier New" AcceptsReturn="True" Text="{Binding MatchResult, Mode=OneWay}"></TextBox>
+      <GridSplitter Grid.Row="1" Background="Purple" ResizeDirection="Rows" />
+
+      <AvalonEdit:TextEditor
+        Name="Editor"
+        Grid.Row="2"
+        FontFamily="Cascadia Code,Consolas,Menlo,Monospace"
+        Margin="30"
+        Foreground="#D4D4D4"
+        HorizontalScrollBarVisibility="Visible"
+        VerticalScrollBarVisibility="Visible"
+        ShowLineNumbers="False"
+        FontWeight="Light"
+        FontSize="14" />
     </Grid>
 
   </Grid>

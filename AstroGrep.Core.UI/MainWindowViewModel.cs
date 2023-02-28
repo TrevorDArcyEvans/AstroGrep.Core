@@ -1,20 +1,28 @@
-﻿using System.ComponentModel;
-using System.IO;
+﻿namespace AstroGrep.Core.UI;
 
-namespace AstroGrep.Core.UI;
-
+using Avalonia.Controls;
+using Avalonia.Media;
+using AvaloniaEdit;
+using AvaloniaEdit.Document;
+using AvaloniaEdit.TextMate;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Avalonia.Controls;
-using ReactiveUI;
+using TextMateSharp.Grammars;
 
 public sealed class MainWindowViewModel : ReactiveObject
 {
   private readonly MainWindow _parent;
+
+  private readonly TextMate.Installation _textMateInstallation;
+  private readonly TextEditor _textEditor;
+  private RegistryOptions _registryOptions = new RegistryOptions(ThemeName.Monokai);
 
   public MainWindowViewModel() :
     this(null)
@@ -24,6 +32,15 @@ public sealed class MainWindowViewModel : ReactiveObject
   public MainWindowViewModel(MainWindow parent)
   {
     _parent = parent;
+
+    _textEditor = _parent.FindControl<TextEditor>("Editor");
+    _textEditor.HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Visible;
+    _textEditor.Background = Brushes.Transparent;
+    _textEditor.TextArea.Background = _parent.Background;
+    _textEditor.Options.ColumnRulerPosition = 80;
+
+    _textMateInstallation = _textEditor.InstallTextMate(_registryOptions);
+    _textMateInstallation.SetTheme(_registryOptions.LoadTheme(ThemeName.DimmedMonokai));
 
     PropertyChanged += OnPropertyChanged;
   }
@@ -129,15 +146,6 @@ public sealed class MainWindowViewModel : ReactiveObject
     set => this.RaiseAndSetIfChanged(ref _matchResults, value);
   }
 
-  private string _matchResult;
-
-  public string MatchResult
-  {
-    get => _matchResult;
-
-    set => this.RaiseAndSetIfChanged(ref _matchResult, value);
-  }
-
   private bool _isOnSearchEnabled;
 
   public bool IsOnSearchEnabled
@@ -172,6 +180,8 @@ public sealed class MainWindowViewModel : ReactiveObject
 
   public void OnSearch()
   {
+    _textEditor.Document = new ();
+
     var searchSpec = new SearchSpec
     {
       StartDirectories = new List<string> { StartFolder },
@@ -197,31 +207,42 @@ public sealed class MainWindowViewModel : ReactiveObject
 
   public void OnMatchResultsSelectionChanged(object sender, MatchResult matchRes)
   {
-    MatchResult = Render(matchRes);
+    if (matchRes is null)
+    {
+      return;
+    }
+
+    var extn = Path.GetExtension(matchRes.File.Name);
+    var lang = _registryOptions.GetLanguageByExtension(extn);
+    var scopeName = _registryOptions.GetScopeByLanguageId(lang.Id);
+
+    _textMateInstallation.SetGrammar(null);
+    _textEditor.Document = Render(matchRes);
+    _textMateInstallation.SetGrammar(scopeName);
   }
 
   private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
   {
     if (e.PropertyName is nameof(SearchText) or nameof(FileType) or nameof(StartFolder))
     {
-      IsOnSearchEnabled = 
-        !string.IsNullOrEmpty(SearchText) && 
-        !string.IsNullOrEmpty(FileType) && 
+      IsOnSearchEnabled =
+        !string.IsNullOrEmpty(SearchText) &&
+        !string.IsNullOrEmpty(FileType) &&
         Directory.Exists(StartFolder);
     }
   }
 
-  private string Render(MatchResult result)
+  private TextDocument Render(MatchResult result)
   {
     var sb = new StringBuilder();
-    foreach (var matchLine in result?.Matches ?? Enumerable.Empty<MatchResultLine>())
+    foreach (var matchLine in result.Matches)
     {
-      var lineNum = matchLine.LineNumber == -1 ? string.Empty : matchLine.LineNumber.ToString(CultureInfo.InvariantCulture);
+      var lineNum = matchLine.LineNumber == -1 ? "    " :$"{ matchLine.LineNumber, 4:####}";
       sb.AppendLine($"{lineNum}  {matchLine.Line}");
     }
 
     sb.AppendLine();
 
-    return sb.ToString();
+    return new TextDocument(sb.ToString());
   }
 }

@@ -5,5 +5,11 @@
   <Application.Styles>
     <FluentTheme Mode="Light" />
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+
+    <!--
+      AvaloniaEdit won't show up
+        https://github.com/AvaloniaUI/AvaloniaEdit/issues/118
+    -->
+    <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
   </Application.Styles>
 </Application>
