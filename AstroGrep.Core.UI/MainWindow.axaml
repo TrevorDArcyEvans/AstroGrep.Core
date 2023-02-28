@@ -34,6 +34,29 @@
       <sys:String>*.h</sys:String>
       <sys:String>*.hpp</sys:String>
       <sys:String>*.vcproj</sys:String>
+      <sys:String>*.java</sys:String>
+      <sys:String>*.js</sys:String>
+      <sys:String>*.ts</sys:String>
+      <sys:String>*.xml</sys:String>
+      <sys:String>*.json</sys:String>
+      <sys:String>*.css</sys:String>
+      <sys:String>*.bat</sys:String>
+      <sys:String>*.pas</sys:String>
+      <sys:String>*.log</sys:String>
+      <sys:String>*.ini</sys:String>
+      <sys:String>*.pl</sys:String>
+      <sys:String>*.php</sys:String>
+      <sys:String>*.ps1</sys:String>
+      <sys:String>*.rb</sys:String>
+      <sys:String>*.sql</sys:String>
+      <sys:String>*.vb</sys:String>
+      <sys:String>*.vb</sys:String>
+      <sys:String>*.bas</sys:String>
+      <sys:String>*.yml</sys:String>
+      <sys:String>*.yaml</sys:String>
+      <sys:String>*.html</sys:String>
+      <sys:String>*.md</sys:String>
+      <sys:String>*.go</sys:String>
     </collections:ArrayList>
   </Window.Resources>
 
