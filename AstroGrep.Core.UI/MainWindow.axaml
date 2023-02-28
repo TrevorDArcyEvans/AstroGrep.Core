@@ -11,6 +11,7 @@
   Icon="/Assets/search.ico"
   Width="1200"
   Height="800"
+  Closed="OnClosed"
   x:Class="AstroGrep.Core.UI.MainWindow"
   Title="AstroGrep Lite">
   <Design.DataContext>

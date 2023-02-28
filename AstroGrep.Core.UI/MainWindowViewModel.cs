@@ -1,4 +1,7 @@
-﻿namespace AstroGrep.Core.UI;
+﻿using System.Text.Json.Nodes;
+using Newtonsoft.Json.Linq;
+
+namespace AstroGrep.Core.UI;
 
 using System;
 using System.Collections.Generic;
@@ -27,7 +30,7 @@ public sealed class MainWindowViewModel : ReactiveObject
   private readonly TextEditor _textEditor;
   private RegistryOptions _registryOptions = new(ThemeName.Monokai);
 
-  public List<FilterItem> FilterItems { get; }
+  public List<FilterItem> FilterItems { get; set; }
 
   public MainWindowViewModel() :
     this(null)
@@ -38,6 +41,44 @@ public sealed class MainWindowViewModel : ReactiveObject
   {
     _parent = parent;
 
+    LoadFilterItems();
+    LoadSettings();
+
+    _textEditor = _parent.FindControl<TextEditor>("Editor");
+    _textEditor.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
+    _textEditor.Background = Brushes.Transparent;
+    _textEditor.TextArea.Background = _parent.Background;
+    _textEditor.Options.ColumnRulerPosition = 80;
+
+    _textMateInstallation = _textEditor.InstallTextMate(_registryOptions);
+    _textMateInstallation.SetTheme(_registryOptions.LoadTheme(ThemeName.DimmedMonokai));
+
+    PropertyChanged += OnPropertyChanged;
+  }
+
+  private void LoadSettings()
+  {
+    var settingsFilePath = GetCreateSettingsFilePath();
+    if (!File.Exists(settingsFilePath))
+    {
+      return;
+    }
+
+    var json = File.ReadAllText(settingsFilePath);
+    var jobj = JObject.Parse(json);
+    StartFolder = jobj.Value<string>(nameof(StartFolder));
+    SearchInSubfolders = jobj.Value<bool>(nameof(SearchInSubfolders));
+    UseRegularExpressions = jobj.Value<bool>(nameof(UseRegularExpressions));
+    UseCaseSensitivity = jobj.Value<bool>(nameof(UseCaseSensitivity));
+    UseWholeWordMatching = jobj.Value<bool>(nameof(UseWholeWordMatching));
+    UseNegation = jobj.Value<bool>(nameof(UseNegation));
+    ContextLines = jobj.Value<int>(nameof(ContextLines));
+    ReturnOnlyFileNames = jobj.Value<bool>(nameof(ReturnOnlyFileNames));
+    FileType = jobj.Value<string>(nameof(FileType));
+  }
+
+  private void LoadFilterItems()
+  {
     var assy = Assembly.GetExecutingAssembly();
     var assyLoc = assy.Location;
     var assyDir = Path.GetDirectoryName(assyLoc);
@@ -51,17 +92,6 @@ public sealed class MainWindowViewModel : ReactiveObject
       }
     };
     FilterItems = JsonSerializer.Deserialize<List<FilterItem>>(json, opts);
-
-    _textEditor = _parent.FindControl<TextEditor>("Editor");
-    _textEditor.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
-    _textEditor.Background = Brushes.Transparent;
-    _textEditor.TextArea.Background = _parent.Background;
-    _textEditor.Options.ColumnRulerPosition = 80;
-
-    _textMateInstallation = _textEditor.InstallTextMate(_registryOptions);
-    _textMateInstallation.SetTheme(_registryOptions.LoadTheme(ThemeName.DimmedMonokai));
-
-    PropertyChanged += OnPropertyChanged;
   }
 
   #region Properties
@@ -240,6 +270,40 @@ public sealed class MainWindowViewModel : ReactiveObject
     _textMateInstallation.SetGrammar(null);
     _textEditor.Document = Render(matchRes);
     _textMateInstallation.SetGrammar(scopeName);
+  }
+
+  public void OnClosed(object? sender, EventArgs e)
+  {
+    SaveSettings();
+  }
+
+  private void SaveSettings()
+  {
+    var settings = new
+    {
+      StartFolder,
+      SearchInSubfolders,
+      UseRegularExpressions,
+      UseCaseSensitivity,
+      UseWholeWordMatching,
+      UseNegation,
+      ContextLines,
+      ReturnOnlyFileNames,
+      FileType
+    };
+    var json = JsonSerializer.Serialize(settings);
+
+    var settingsFilePath = GetCreateSettingsFilePath();
+    File.WriteAllText(settingsFilePath, json);
+  }
+
+  private static string GetCreateSettingsFilePath()
+  {
+    var appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+    var settingsDir = Path.Combine(appData, "AstroGrep");
+    Directory.CreateDirectory(settingsDir);
+    var settingsFilePath = Path.Combine(settingsDir, "settings.json");
+    return settingsFilePath;
   }
 
   private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
