@@ -126,7 +126,16 @@
       </DockPanel>
       <Border DockPanel.Dock="Top" Height="10" />
 
-      <Button DockPanel.Dock="Top">Exclusions...</Button>
+      <TextBlock DockPanel.Dock="Top">Exclusions...</TextBlock>
+      <DataGrid DockPanel.Dock="Top" Items="{Binding FilterItems, Mode=OneWay}">
+        <DataGrid.Columns>
+          <DataGridCheckBoxColumn Header="Enabled" IsReadOnly="True" Binding="{Binding  Enabled}" />
+          <DataGridTextColumn Header="Category" IsReadOnly="True" Binding="{Binding FilterType.Category}" />
+          <DataGridTextColumn Header="Type" IsReadOnly="True" Binding="{Binding FilterType.SubCategory}" />
+          <DataGridTextColumn Header="Value" IsReadOnly="True" Binding="{Binding Value}" />
+          <DataGridTextColumn Header="Options" IsReadOnly="True" Binding="{Binding ValueOption}" />
+        </DataGrid.Columns>
+      </DataGrid>
       <Border DockPanel.Dock="Top" Height="10" />
     </DockPanel>
 

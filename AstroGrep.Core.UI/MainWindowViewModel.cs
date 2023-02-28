@@ -24,6 +24,37 @@ public sealed class MainWindowViewModel : ReactiveObject
   private readonly TextEditor _textEditor;
   private RegistryOptions _registryOptions = new RegistryOptions(ThemeName.Monokai);
 
+  public List<FilterItem> FilterItems { get; } = new List<FilterItem>
+  {
+    new FilterItem(FilterType.FromString("File^Extension"), ".exe", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".dll", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".obj", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".pdb", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".msi", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".sys", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".ppt", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".gif", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".jpg", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".jpeg", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".png", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".bmp", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".class", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".chm", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".mdf", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".ldf", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("File^Extension"), ".ndf", FilterType.ValueOptions.None, true),
+    new FilterItem(FilterType.FromString("Directory^Name"), ".git", FilterType.ValueOptions.Equals, true),
+    new FilterItem(FilterType.FromString("Directory^Name"), ".hg", FilterType.ValueOptions.Equals, true),
+    new FilterItem(FilterType.FromString("Directory^Name"), ".svn", FilterType.ValueOptions.Equals, true),
+    new FilterItem(FilterType.FromString("Directory^Name"), ".cvs", FilterType.ValueOptions.Equals, true),
+    new FilterItem(FilterType.FromString("Directory^Name"), ".metadata", FilterType.ValueOptions.Equals, true),
+    new FilterItem(FilterType.FromString("Directory^Name"), ".settings", FilterType.ValueOptions.Equals, true),
+    new FilterItem(FilterType.FromString("Directory^Name"), ".vscode", FilterType.ValueOptions.Equals, true),
+    new FilterItem(FilterType.FromString("Directory^Name"), ".idea", FilterType.ValueOptions.Equals, true),
+    new FilterItem(FilterType.FromString("Directory^Name"), ".cache", FilterType.ValueOptions.Equals, true),
+    new FilterItem(FilterType.FromString("Directory^Name"), "node_modules", FilterType.ValueOptions.Equals, true)
+  };
+
   public MainWindowViewModel() :
     this(null)
   {
@@ -197,7 +228,8 @@ public sealed class MainWindowViewModel : ReactiveObject
 
     var filterSpec = new FileFilterSpec
     {
-      FileFilter = FileType
+      FileFilter = FileType,
+      FilterItems = FilterItems
     };
 
     var grep = new Grep(searchSpec, filterSpec);

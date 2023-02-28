@@ -61,7 +61,7 @@ dotnet run
 * ~~Linux desktop UI~~
 * reinstate cross platform encoding detection
 * ~~integrate [Avalon.Edit](https://github.com/AvaloniaUI/AvaloniaEdit)~~
-* support excluding files + directories
+* ~~support excluding files + directories~~
 * persist/restore settings
 
 ## Acknowledgements
