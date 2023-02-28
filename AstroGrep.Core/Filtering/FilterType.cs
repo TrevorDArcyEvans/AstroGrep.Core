@@ -224,25 +224,25 @@ public class FilterType
     var defaultTypes = new List<FilterType>
     {
       // File
-      new FilterType(Categories.File, SubCategories.Extension),
-      new FilterType(Categories.File, SubCategories.Name),
-      new FilterType(Categories.File, SubCategories.Path),
-      new FilterType(Categories.File, SubCategories.System),
-      new FilterType(Categories.File, SubCategories.Hidden),
-      new FilterType(Categories.File, SubCategories.Binary),
-      new FilterType(Categories.File, SubCategories.ReadOnly),
-      new FilterType(Categories.File, SubCategories.DateModified),
-      new FilterType(Categories.File, SubCategories.DateCreated),
-      new FilterType(Categories.File, SubCategories.Size),
-      new FilterType(Categories.File, SubCategories.MinimumHitCount),
+      new(Categories.File, SubCategories.Extension),
+      new(Categories.File, SubCategories.Name),
+      new(Categories.File, SubCategories.Path),
+      new(Categories.File, SubCategories.System),
+      new(Categories.File, SubCategories.Hidden),
+      new(Categories.File, SubCategories.Binary),
+      new(Categories.File, SubCategories.ReadOnly),
+      new(Categories.File, SubCategories.DateModified),
+      new(Categories.File, SubCategories.DateCreated),
+      new(Categories.File, SubCategories.Size),
+      new(Categories.File, SubCategories.MinimumHitCount),
 
       // Directory
-      new FilterType(Categories.Directory, SubCategories.Name),
-      new FilterType(Categories.Directory, SubCategories.Path),
-      new FilterType(Categories.Directory, SubCategories.System),
-      new FilterType(Categories.Directory, SubCategories.Hidden),
-      new FilterType(Categories.Directory, SubCategories.DateModified),
-      new FilterType(Categories.Directory, SubCategories.DateCreated)
+      new(Categories.Directory, SubCategories.Name),
+      new(Categories.Directory, SubCategories.Path),
+      new(Categories.Directory, SubCategories.System),
+      new(Categories.Directory, SubCategories.Hidden),
+      new(Categories.Directory, SubCategories.DateModified),
+      new(Categories.Directory, SubCategories.DateCreated)
     };
 
     return defaultTypes;
