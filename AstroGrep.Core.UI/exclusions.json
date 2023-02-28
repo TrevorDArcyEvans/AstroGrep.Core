@@ -1,0 +1,491 @@
+[
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".exe",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".dll",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".obj",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".pdb",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".msi",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".sys",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".ppt",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".gif",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".jpg",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".jpeg",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".png",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".bmp",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".class",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".chm",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".mdf",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".ldf",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".ndf",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "Directory",
+      "SubCategory": "Name",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith"
+      ],
+      "SupportsIgnoreCase": true,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".git",
+    "ValueOption": "Equals",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "Directory",
+      "SubCategory": "Name",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith"
+      ],
+      "SupportsIgnoreCase": true,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".hg",
+    "ValueOption": "Equals",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "Directory",
+      "SubCategory": "Name",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith"
+      ],
+      "SupportsIgnoreCase": true,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".svn",
+    "ValueOption": "Equals",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "Directory",
+      "SubCategory": "Name",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith"
+      ],
+      "SupportsIgnoreCase": true,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".cvs",
+    "ValueOption": "Equals",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "Directory",
+      "SubCategory": "Name",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith"
+      ],
+      "SupportsIgnoreCase": true,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".metadata",
+    "ValueOption": "Equals",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "Directory",
+      "SubCategory": "Name",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith"
+      ],
+      "SupportsIgnoreCase": true,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".settings",
+    "ValueOption": "Equals",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "Directory",
+      "SubCategory": "Name",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith"
+      ],
+      "SupportsIgnoreCase": true,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".vscode",
+    "ValueOption": "Equals",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "Directory",
+      "SubCategory": "Name",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith"
+      ],
+      "SupportsIgnoreCase": true,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".idea",
+    "ValueOption": "Equals",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "Directory",
+      "SubCategory": "Name",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith"
+      ],
+      "SupportsIgnoreCase": true,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".cache",
+    "ValueOption": "Equals",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "Directory",
+      "SubCategory": "Name",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith"
+      ],
+      "SupportsIgnoreCase": true,
+      "SupportsMultipleItems": true
+    },
+    "Value": "node_modules",
+    "ValueOption": "Equals",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  }
+]

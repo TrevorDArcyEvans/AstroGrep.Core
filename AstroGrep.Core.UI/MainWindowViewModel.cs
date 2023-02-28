@@ -1,19 +1,22 @@
 ﻿namespace AstroGrep.Core.UI;
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using AvaloniaEdit;
 using AvaloniaEdit.Document;
 using AvaloniaEdit.TextMate;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TextMateSharp.Grammars;
 
 public sealed class MainWindowViewModel : ReactiveObject
@@ -24,36 +27,7 @@ public sealed class MainWindowViewModel : ReactiveObject
   private readonly TextEditor _textEditor;
   private RegistryOptions _registryOptions = new(ThemeName.Monokai);
 
-  public List<FilterItem> FilterItems { get; } = new()
-  {
-    new (FilterType.FromString("File^Extension"), ".exe", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".dll", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".obj", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".pdb", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".msi", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".sys", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".ppt", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".gif", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".jpg", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".jpeg", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".png", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".bmp", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".class", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".chm", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".mdf", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".ldf", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("File^Extension"), ".ndf", FilterType.ValueOptions.None, true),
-    new (FilterType.FromString("Directory^Name"), ".git", FilterType.ValueOptions.Equals, true),
-    new (FilterType.FromString("Directory^Name"), ".hg", FilterType.ValueOptions.Equals, true),
-    new (FilterType.FromString("Directory^Name"), ".svn", FilterType.ValueOptions.Equals, true),
-    new (FilterType.FromString("Directory^Name"), ".cvs", FilterType.ValueOptions.Equals, true),
-    new (FilterType.FromString("Directory^Name"), ".metadata", FilterType.ValueOptions.Equals, true),
-    new (FilterType.FromString("Directory^Name"), ".settings", FilterType.ValueOptions.Equals, true),
-    new (FilterType.FromString("Directory^Name"), ".vscode", FilterType.ValueOptions.Equals, true),
-    new (FilterType.FromString("Directory^Name"), ".idea", FilterType.ValueOptions.Equals, true),
-    new (FilterType.FromString("Directory^Name"), ".cache", FilterType.ValueOptions.Equals, true),
-    new (FilterType.FromString("Directory^Name"), "node_modules", FilterType.ValueOptions.Equals, true)
-  };
+  public List<FilterItem> FilterItems { get; }
 
   public MainWindowViewModel() :
     this(null)
@@ -64,8 +38,22 @@ public sealed class MainWindowViewModel : ReactiveObject
   {
     _parent = parent;
 
+    var assy = Assembly.GetExecutingAssembly();
+    var assyLoc = assy.Location;
+    var assyDir = Path.GetDirectoryName(assyLoc);
+    var excFilePath = Path.Combine(assyDir, "exclusions.json");
+    var json = File.ReadAllText(excFilePath);
+    var opts = new JsonSerializerOptions
+    {
+      Converters =
+      {
+        new JsonStringEnumConverter()
+      }
+    };
+    FilterItems = JsonSerializer.Deserialize<List<FilterItem>>(json, opts);
+
     _textEditor = _parent.FindControl<TextEditor>("Editor");
-    _textEditor.HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Visible;
+    _textEditor.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
     _textEditor.Background = Brushes.Transparent;
     _textEditor.TextArea.Background = _parent.Background;
     _textEditor.Options.ColumnRulerPosition = 80;
@@ -187,6 +175,7 @@ public sealed class MainWindowViewModel : ReactiveObject
   }
 
   private MatchResult _selectedItem;
+
   public MatchResult SelectedItem
   {
     get => _selectedItem;
@@ -211,11 +200,11 @@ public sealed class MainWindowViewModel : ReactiveObject
 
   public void OnSearch()
   {
-    _textEditor.Document = new ();
+    _textEditor.Document = new();
 
     var searchSpec = new SearchSpec
     {
-      StartDirectories = new List<string> { StartFolder },
+      StartDirectories = new List<string> {StartFolder},
       SearchText = SearchText,
       UseRegularExpressions = UseRegularExpressions,
       UseCaseSensitivity = UseCaseSensitivity,
@@ -269,7 +258,7 @@ public sealed class MainWindowViewModel : ReactiveObject
     var sb = new StringBuilder();
     foreach (var matchLine in result.Matches)
     {
-      var lineNum = matchLine.LineNumber == -1 ? "    " :$"{ matchLine.LineNumber, 4:####}";
+      var lineNum = matchLine.LineNumber == -1 ? "    " : $"{matchLine.LineNumber,4:####}";
       sb.AppendLine($"{lineNum}  {matchLine.Line}");
     }
 
