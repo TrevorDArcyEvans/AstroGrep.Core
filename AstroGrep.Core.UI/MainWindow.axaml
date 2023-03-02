@@ -68,13 +68,12 @@
       <ColumnDefinition />
     </Grid.ColumnDefinitions>
 
-    <DockPanel LastChildFill="True" Margin="10">
-      <TextBlock DockPanel.Dock="Top" Foreground="Purple" Text="Astrogrep Lite Search" />
-      <Border DockPanel.Dock="Top" Height="2" BorderBrush="Purple" BorderThickness="1" />
-      <Border DockPanel.Dock="Top" Height="10" />
+    <DockPanel LastChildFill="True">
+      <TextBlock DockPanel.Dock="Top" Margin="5" Foreground="Purple" Text="Astrogrep Lite Search" />
+      <Border DockPanel.Dock="Top" Margin="5" Height="2" BorderBrush="Purple" BorderThickness="1" />
 
-      <TextBlock DockPanel.Dock="Top" Text="Search path:" />
-      <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+      <TextBlock DockPanel.Dock="Top" Margin="5,5,5,0" Text="Search path:" />
+      <DockPanel DockPanel.Dock="Top" Margin="5" LastChildFill="True">
         <Button DockPanel.Dock="Right" Command="{Binding OnSelectStartFolder}">
           <Panel>
             <Image Source="/Assets/folder.png" Height="20" Width="20"></Image>
@@ -82,53 +81,34 @@
         </Button>
         <TextBox Text="{Binding StartFolder}"></TextBox>
       </DockPanel>
-      <Border DockPanel.Dock="Top" Height="10" />
 
-      <TextBlock DockPanel.Dock="Top" Text="File types:" />
-      <AutoCompleteBox DockPanel.Dock="Top" Items="{StaticResource FileFilters }" Text="{Binding FileType}" />
-      <Border DockPanel.Dock="Top" Height="10" />
+      <TextBlock DockPanel.Dock="Top" Margin="5,5,5,0" Text="File types:" />
+      <AutoCompleteBox DockPanel.Dock="Top" Margin="5" Items="{StaticResource FileFilters }" Text="{Binding FileType}" />
 
-      <TextBlock DockPanel.Dock="Top" Text="Search text:" />
-      <TextBox DockPanel.Dock="Top" Watermark="Please enter search text" Text="{Binding SearchText}" />
-      <Border DockPanel.Dock="Top" Height="10" />
+      <TextBlock DockPanel.Dock="Top" Margin="5,5,5,0" Text="Search text:" />
+      <TextBox DockPanel.Dock="Top" Margin="5" Watermark="Please enter search text" Text="{Binding SearchText}" />
 
-      <Button DockPanel.Dock="Top" Command="{Binding OnSearch}" IsEnabled="{Binding IsOnSearchEnabled}">Search</Button>
-      <Border DockPanel.Dock="Top" Height="10" />
+      <Button DockPanel.Dock="Top" Margin="5" Command="{Binding OnSearch}" IsEnabled="{Binding IsOnSearchEnabled}">Search</Button>
 
-      <TextBlock DockPanel.Dock="Top" Foreground="Purple" Text="Search Options" />
-      <Border DockPanel.Dock="Top" Height="2" BorderBrush="Purple" BorderThickness="1" />
-      <Border DockPanel.Dock="Top" Height="10" />
+      <TextBlock DockPanel.Dock="Top" Margin="5,5,5,0" Foreground="Purple" Text="Search Options" />
+      <Border DockPanel.Dock="Top" Margin="5" Height="2" BorderBrush="Purple" BorderThickness="1" />
 
-      <CheckBox DockPanel.Dock="Top" IsChecked="{Binding UseRegularExpressions}">Regular expressions</CheckBox>
-      <Border DockPanel.Dock="Top" Height="10" />
+      <CheckBox DockPanel.Dock="Top" Margin="5,5,5,0" IsChecked="{Binding UseRegularExpressions}">Regular expressions</CheckBox>
+      <CheckBox DockPanel.Dock="Top" Margin="5,5,5,0" IsChecked="{Binding UseCaseSensitivity}">Case sensitive</CheckBox>
+      <CheckBox DockPanel.Dock="Top" Margin="5,5,5,0" IsChecked="{Binding UseWholeWordMatching}">Whole word</CheckBox>
+      <CheckBox DockPanel.Dock="Top" Margin="5,5,5,0" IsChecked="{Binding SearchInSubfolders}">Search subfolders</CheckBox>
+      <CheckBox DockPanel.Dock="Top" Margin="5,5,5,0" IsChecked="{Binding ReturnOnlyFileNames}">Show filename only</CheckBox>
+      <CheckBox DockPanel.Dock="Top" Margin="5,5,5,0" IsChecked="{Binding UseNegation}">Negation</CheckBox>
+      <CheckBox DockPanel.Dock="Top" Margin="5,5,5,0" IsChecked="True">Show all results after search</CheckBox>
 
-      <CheckBox DockPanel.Dock="Top" IsChecked="{Binding UseCaseSensitivity}">Case sensitive</CheckBox>
-      <Border DockPanel.Dock="Top" Height="10" />
-
-      <CheckBox DockPanel.Dock="Top" IsChecked="{Binding UseWholeWordMatching}">Whole word</CheckBox>
-      <Border DockPanel.Dock="Top" Height="10" />
-
-      <CheckBox DockPanel.Dock="Top" IsChecked="{Binding SearchInSubfolders}">Search subfolders</CheckBox>
-      <Border DockPanel.Dock="Top" Height="10" />
-
-      <CheckBox DockPanel.Dock="Top" IsChecked="{Binding ReturnOnlyFileNames}">Show filename only</CheckBox>
-      <Border DockPanel.Dock="Top" Height="10" />
-
-      <CheckBox DockPanel.Dock="Top" IsChecked="{Binding UseNegation}">Negation</CheckBox>
-      <Border DockPanel.Dock="Top" Height="10" />
-
-      <CheckBox DockPanel.Dock="Top" IsChecked="True">Show all results after search</CheckBox>
-      <Border DockPanel.Dock="Top" Height="10" />
-
-      <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+      <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0" LastChildFill="True">
         <NumericUpDown DockPanel.Dock="Left" Value="{Binding ContextLines}" Minimum="0" Maximum="100" Width="120" />
         <Border DockPanel.Dock="Left" Width="10" />
         <TextBlock Text="Context lines" />
       </DockPanel>
-      <Border DockPanel.Dock="Top" Height="10" />
 
-      <TextBlock DockPanel.Dock="Top">Exclusions...</TextBlock>
-      <DataGrid DockPanel.Dock="Top" Items="{Binding FilterItems, Mode=OneWay}">
+      <TextBlock DockPanel.Dock="Top" Margin="5,5,5,0">Exclusions:</TextBlock>
+      <DataGrid DockPanel.Dock="Top" Margin="5" Items="{Binding FilterItems, Mode=OneWay}">
         <DataGrid.Columns>
           <DataGridCheckBoxColumn Header="Enabled" IsReadOnly="True" Binding="{Binding  Enabled}" />
           <DataGridTextColumn Header="Category" IsReadOnly="True" Binding="{Binding FilterType.Category}" />
@@ -137,7 +117,6 @@
           <DataGridTextColumn Header="Options" IsReadOnly="True" Binding="{Binding ValueOption}" />
         </DataGrid.Columns>
       </DataGrid>
-      <Border DockPanel.Dock="Top" Height="10" />
     </DockPanel>
 
     <GridSplitter Grid.Column="1" Background="Purple" ResizeDirection="Columns" />
