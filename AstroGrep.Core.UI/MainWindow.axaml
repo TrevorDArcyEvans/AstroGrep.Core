@@ -88,7 +88,10 @@
       <TextBlock DockPanel.Dock="Top" Margin="5,5,5,0" Text="Search text:" />
       <TextBox DockPanel.Dock="Top" Margin="5" Watermark="Please enter search text" Text="{Binding SearchText}" />
 
-      <Button DockPanel.Dock="Top" Margin="5" Command="{Binding OnSearch}" IsEnabled="{Binding IsOnSearchEnabled}">Search</Button>
+      <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0" LastChildFill="True">
+        <Button DockPanel.Dock="Left" Command="{Binding OnSearch}" IsEnabled="{Binding IsOnSearchEnabled}">Search</Button>
+        <TextBlock DockPanel.Dock="Left" Margin="5,5,5,0" Text="Searching..." IsVisible="{Binding IsSearching}" />
+      </DockPanel>
 
       <TextBlock DockPanel.Dock="Top" Margin="5,5,5,0" Foreground="Purple" Text="Search Options" />
       <Border DockPanel.Dock="Top" Margin="5" Height="2" BorderBrush="Purple" BorderThickness="1" />

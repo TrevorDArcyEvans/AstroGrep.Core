@@ -1,6 +1,4 @@
-﻿namespace AstroGrep.Core.UI;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -12,7 +10,11 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+
+namespace AstroGrep.Core.UI;
+
 using Avalonia.Media;
+using Avalonia.Threading;
 using AvaloniaEdit;
 using AvaloniaEdit.Document;
 using AvaloniaEdit.TextMate;
@@ -215,6 +217,15 @@ public sealed class MainWindowViewModel : ReactiveObject
     }
   }
 
+  private bool _isSearching;
+
+  public bool IsSearching
+  {
+    get => _isSearching;
+
+    set => this.RaiseAndSetIfChanged(ref _isSearching, value);
+  }
+
   #endregion
 
   public async Task OnSelectStartFolder()
@@ -226,13 +237,20 @@ public sealed class MainWindowViewModel : ReactiveObject
     StartFolder = await dlg.ShowAsync(_parent) ?? StartFolder;
   }
 
-  public void OnSearch()
+  public async Task OnSearch()
   {
-    _textEditor.Document = new();
+    // have to add  delay so that UI thread has chance to run and update UI - go figure
+    await Dispatcher.UIThread.InvokeAsync(() =>
+    {
+      MatchResults = Enumerable.Empty<MatchResult>();
+      IsSearching = true;
+      _textEditor.Document = new();
+    });
+    await Task.Delay(TimeSpan.FromMilliseconds(50));
 
     var searchSpec = new SearchSpec
     {
-      StartDirectories = new List<string> {StartFolder},
+      StartDirectories = new List<string> { StartFolder },
       SearchText = SearchText,
       UseRegularExpressions = UseRegularExpressions,
       UseCaseSensitivity = UseCaseSensitivity,
@@ -250,7 +268,17 @@ public sealed class MainWindowViewModel : ReactiveObject
     };
 
     var grep = new Grep(searchSpec, filterSpec);
-    grep.Execute();
+    try
+    {
+      grep.Execute();
+    }
+    finally
+    {
+      // have to add  delay so that UI thread has chance to run and update UI - go figure
+      await Dispatcher.UIThread.InvokeAsync(() => { IsSearching = false; });
+      await Task.Delay(TimeSpan.FromMilliseconds(50));
+    }
+
     MatchResults = grep.MatchResults;
   }
 
