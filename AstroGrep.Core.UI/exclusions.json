@@ -291,6 +291,40 @@
   {
     "Enabled": true,
     "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".so",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "File",
+      "SubCategory": "Extension",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "None"
+      ],
+      "SupportsIgnoreCase": false,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".dylib",
+    "ValueOption": "None",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
       "Category": "Directory",
       "SubCategory": "Name",
       "ValueType": "String",
@@ -484,6 +518,26 @@
       "SupportsMultipleItems": true
     },
     "Value": "node_modules",
+    "ValueOption": "Equals",
+    "ValueIgnoreCase": true,
+    "ValueSizeOption": ""
+  },
+  {
+    "Enabled": true,
+    "FilterType": {
+      "Category": "Directory",
+      "SubCategory": "Name",
+      "ValueType": "String",
+      "SupportedValueOptions": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith"
+      ],
+      "SupportsIgnoreCase": true,
+      "SupportsMultipleItems": true
+    },
+    "Value": ".vs",
     "ValueOption": "Equals",
     "ValueIgnoreCase": true,
     "ValueSizeOption": ""
