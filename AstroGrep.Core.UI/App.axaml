@@ -3,13 +3,8 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   x:Class="AstroGrep.Core.UI.App">
   <Application.Styles>
-    <FluentTheme Mode="Light" />
+    <FluentTheme />
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
-
-    <!--
-      AvaloniaEdit won't show up
-        https://github.com/AvaloniaUI/AvaloniaEdit/issues/118
-    -->
-    <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
+    <StyleInclude Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml" />
   </Application.Styles>
 </Application>

@@ -48,7 +48,7 @@ public sealed class MainWindowViewModel : ReactiveObject
     _textEditor.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
     _textEditor.Background = Brushes.Transparent;
     _textEditor.TextArea.Background = _parent.Background;
-    _textEditor.Options.ColumnRulerPosition = 80;
+    _textEditor.Options.ColumnRulerPositions = [80];
 
     _textMateInstallation = _textEditor.InstallTextMate(_registryOptions);
     _textMateInstallation.SetTheme(_registryOptions.LoadTheme(ThemeName.DimmedMonokai));

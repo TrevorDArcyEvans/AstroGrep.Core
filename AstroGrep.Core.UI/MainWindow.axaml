@@ -83,7 +83,7 @@
       </DockPanel>
 
       <TextBlock DockPanel.Dock="Top" Margin="5,5,5,0" Text="File types:" />
-      <AutoCompleteBox DockPanel.Dock="Top" Margin="5" Items="{StaticResource FileFilters }" Text="{Binding FileType}" />
+      <AutoCompleteBox DockPanel.Dock="Top" Margin="5" ItemsSource="{StaticResource FileFilters }" Text="{Binding FileType}" />
 
       <TextBlock DockPanel.Dock="Top" Margin="5,5,5,0" Text="Search text:" />
       <TextBox DockPanel.Dock="Top" Margin="5" Watermark="Please enter search text" Text="{Binding SearchText}" />
@@ -111,7 +111,7 @@
       </DockPanel>
 
       <TextBlock DockPanel.Dock="Top" Margin="5,5,5,0">Exclusions:</TextBlock>
-      <DataGrid DockPanel.Dock="Top" Margin="5" Items="{Binding FilterItems, Mode=OneWay}">
+      <DataGrid DockPanel.Dock="Top" Margin="5" ItemsSource="{Binding FilterItems, Mode=OneWay}">
         <DataGrid.Columns>
           <DataGridCheckBoxColumn Header="Enabled" IsReadOnly="True" Binding="{Binding  Enabled}" />
           <DataGridTextColumn Header="Category" IsReadOnly="True" Binding="{Binding FilterType.Category}" />
@@ -135,7 +135,7 @@
       Have to use event handler on View as will not compile with binding to ViewModel:
         SelectionChanged="{Binding OnMatchResultsSelectionChanged}"
       -->
-      <DataGrid Items="{Binding MatchResults, Mode=OneWay}" SelectedItem="{Binding SelectedItem}">
+      <DataGrid ItemsSource="{Binding MatchResults, Mode=OneWay}" SelectedItem="{Binding SelectedItem}">
         <DataGrid.Columns>
           <DataGridTextColumn Header="Name" Binding="{Binding  File.Name}" />
           <DataGridTextColumn Header="Located in" Binding="{Binding File.DirectoryName}" />
