@@ -78,9 +78,7 @@ public sealed class MainWindowViewModel : ReactiveObject
 
   private void LoadFilterItems()
   {
-    var assy = Assembly.GetExecutingAssembly();
-    var assyLoc = assy.Location;
-    var assyDir = Path.GetDirectoryName(assyLoc);
+    var assyDir = AppContext.BaseDirectory;
     var excFilePath = Path.Combine(assyDir, "exclusions.json");
     var json = File.ReadAllText(excFilePath);
     var opts = new JsonSerializerOptions
