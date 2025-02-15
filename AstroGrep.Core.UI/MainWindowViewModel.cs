@@ -1,4 +1,6 @@
-﻿using System;
+﻿namespace AstroGrep.Core.UI;
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -10,9 +12,6 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-
-namespace AstroGrep.Core.UI;
-
 using Avalonia.Media;
 using Avalonia.Threading;
 using AvaloniaEdit;
